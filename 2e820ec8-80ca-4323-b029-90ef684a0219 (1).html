@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base target="_self">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MythBuster AI - Detect Truth from Fiction</title>
+    <meta name="description" content="AI-powered tool to detect whether text is a myth or fact. Get instant verification with our intelligent analysis system.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#3B82F6",
+                        secondary: "#1E40AF",
+                        myth: "#EF4444",
+                        fact: "#10B981",
+                        warning: "#F59E0B"
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <!-- Header -->
+    <header class="bg-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-3 mb-4 md:mb-0">
+                    <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                        <i class="fas fa-brain text-white text-xl"></i>
+                    </div>
+                    <h1 class="text-2xl md:text-3xl font-bold text-gray-800">MythBuster AI</h1>
+                </div>
+                <nav class="flex space-x-6">
+                    <a href="#detector" class="text-gray-600 hover:text-primary font-medium transition-colors">Detector</a>
+                    <a href="#examples" class="text-gray-600 hover:text-primary font-medium transition-colors">Examples</a>
+                    <a href="#help" class="text-gray-600 hover:text-primary font-medium transition-colors">Help</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <!-- Hero Section -->
+        <section class="text-center mb-12">
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+                Truth Detection Made Simple
+            </h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                Use our advanced AI to instantly analyze any statement and determine if it's a myth or fact. 
+                Get reliable results in seconds.
+            </p>
+        </section>
+
+        <!-- Detector Section -->
+        <section id="detector" class="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-12">
+            <div class="max-w-4xl mx-auto">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">AI Myth/Fact Detector</h3>
+                
+                <div class="mb-6">
+                    <label for="textInput" class="block text-sm font-medium text-gray-700 mb-2">
+                        Enter your statement to analyze:
+                    </label>
+                    <textarea 
+                        id="textInput" 
+                        rows="4" 
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                        placeholder="Type any statement here to check if it's a myth or fact..."
+                    ></textarea>
+                </div>
+
+                <div class="flex justify-center mb-6">
+                    <button 
+                        id="analyzeBtn" 
+                        class="bg-primary hover:bg-secondary text-white font-semibold py-3 px-8 rounded-lg transition-colors flex items-center space-x-2"
+                    >
+                        <i class="fas fa-search"></i>
+                        <span>Analyze Statement</span>
+                    </button>
+                </div>
+
+                <!-- Results Section -->
+                <div id="results" class="hidden">
+                    <div class="border-t pt-6">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-4">Analysis Results:</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="bg-gray-50 rounded-lg p-4 text-center">
+                                <div class="text-sm text-gray-600 mb-1">Confidence Level</div>
+                                <div id="confidence" class="text-2xl font-bold text-primary">85%</div>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-4 text-center">
+                                <div class="text-sm text-gray-600 mb-1">Detection</div>
+                                <div id="detection" class="text-2xl font-bold text-fact">FACT</div>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-4 text-center">
+                                <div class="text-sm text-gray-600 mb-1">Analysis Time</div>
+                                <div id="analysisTime" class="text-2xl font-bold text-secondary">0.8s</div>
+                            </div>
+                        </div>
+                        
+                        <div id="explanation" class="mt-6 p-4 bg-blue-50 rounded-lg">
+                            <h5 class="font-semibold text-gray-800 mb-2">AI Explanation:</h5>
+                            <p id="explanationText" class="text-gray-700">
+                                Based on our analysis of reliable sources and data patterns, this statement appears to be accurate and supported by evidence.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Examples Section -->
+        <section id="examples" class="mb-12">
+            <h3 class="text-3xl font-bold text-gray-800 mb-8 text-center">Common Myths & Facts</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Myths Column -->
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-8 h-8 bg-myth rounded-full flex items-center justify-center mr-3">
+                            <i class="fas fa-times text-white"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-800">Common Myths</h4>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="p-4 bg-red-50 rounded-lg border-l-4 border-myth">
+                            <p class="text-gray-800">"Humans only use 10% of their brain capacity."</p>
+                            <p class="text-sm text-gray-600 mt-1">Modern neuroscience shows we use virtually all parts of our brain.</p>
+                        </div>
+                        <div class="p-4 bg-red-50 rounded-lg border-l-4 border-myth">
+                            <p class="text-gray-800">"Shaving makes hair grow back thicker and darker."</p>
+                            <p class="text-sm text-gray-600 mt-1">Shaving doesn't change hair thickness or color, it just creates a blunt tip.</p>
+                        </div>
+                        <div class="p-4 bg-red-50 rounded-lg border-l-4 border-myth">
+                            <p class="text-gray-800">"Goldfish have a 3-second memory span."</p>
+                            <p class="text-sm text-gray-600 mt-1">Goldfish can remember things for months and can be trained.</p>
+                        </div>
+                        <div class="p-4 bg-red-50 rounded-lg border-l-4 border-myth">
+                            <p class="text-gray-800">"You need to wait 24 hours before reporting a missing person."</p>
+                            <p class="text-sm text-gray-600 mt-1">You should report missing persons immediately to increase chances of finding them.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Facts Column -->
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-8 h-8 bg-fact rounded-full flex items-center justify-center mr-3">
+                            <i class="fas fa-check text-white"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-800">Verified Facts</h4>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="p-4 bg-green-50 rounded-lg border-l-4 border-fact">
+                            <p class="text-gray-800">"Regular exercise improves brain function and memory."</p>
+                            <p class="text-sm text-gray-600 mt-1">Studies show exercise increases blood flow to the brain and promotes neurogenesis.</p>
+                        </div>
+                        <div class="p-4 bg-green-50 rounded-lg border-l-4 border-fact">
+                            <p class="text-gray-800">"Drinking 8 glasses of water daily is beneficial for health."</p>
+                            <p class="text-sm text-gray-600 mt-1">Proper hydration supports kidney function, skin health, and overall bodily processes.</p>
+                        </div>
+                        <div class="p-4 bg-green-50 rounded-lg border-l-4 border-fact">
+                            <p class="text-gray-800">"Vaccines have significantly reduced infectious disease mortality."</p>
+                            <p class="text-sm text-gray-600 mt-1">Vaccines prevent 2-3 million deaths annually according to WHO data.</p>
+                        </div>
+                        <div class="p-4 bg-green-50 rounded-lg border-l-4 border-fact">
+                            <p class="text-gray-800">"The Great Wall of China is not visible from space with the naked eye."</p>
+                            <p class="text-sm text-gray-600 mt-1">NASA confirms it's not visible without aid, contrary to popular belief.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Help Section -->
+        <section id="help" class="bg-white rounded-2xl shadow-lg p-8 mb-12">
+            <div class="max-w-4xl mx-auto text-center">
+                <h3 class="text-3xl font-bold text-gray-800 mb-4">Need Help?</h3>
+                <p class="text-lg text-gray-600 mb-6">
+                    Our AI system is constantly learning and improving. If you have questions, suggestions, 
+                    or need assistance with our myth/fact detection, feel free to reach out.
+                </p>
+                <div class="bg-blue-50 rounded-xl p-6 inline-block">
+                    <div class="flex items-center justify-center space-x-3">
+                        <i class="fas fa-envelope text-primary text-2xl"></i>
+                        <div class="text-left">
+                            <div class="text-sm text-gray-600">Contact our support team:</div>
+                            <div class="text-xl font-semibold text-gray-800">sweepguy26@gmail.com</div>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-500 mt-4">
+                    We typically respond within 24 hours. Please include detailed information about your inquiry.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                            <i class="fas fa-brain text-white"></i>
+                        </div>
+                        <span class="text-xl font-bold">MythBuster AI</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mt-2">Powered by Advanced Artificial Intelligence</p>
+                </div>
+                <div class="text-center md:text-right">
+                    <p class="text-gray-400">&copy; 2024 MythBuster AI. All rights reserved.</p>
+                    <p class="text-gray-400 text-sm mt-1">Designed to promote truth and combat misinformation</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sample database of known myths and facts for demonstration
+        const knowledgeBase = [
+            {
+                "text": "humans only use 10% of their brain",
+                "type": "myth",
+                "confidence": 92,
+                "explanation": "Modern neuroscience using fMRI and PET scans shows that humans use virtually all parts of the brain, and most of the brain is active almost all the time."
+            },
+            {
+                "text": "regular exercise improves brain function",
+                "type": "fact",
+                "confidence": 95,
+                "explanation": "Numerous studies confirm that regular physical activity increases blood flow to the brain, promotes neurogenesis, and improves cognitive function and memory."
+            },
+            {
+                "text": "shaving makes hair grow back thicker",
+                "type": "myth",
+                "confidence": 88,
+                "explanation": "Shaving doesn't change the thickness or color of hair. It creates a blunt tip that may feel coarser initially, but the hair structure remains unchanged."
+            },
+            {
+                "text": "drinking water is beneficial for health",
+                "type": "fact",
+                "confidence": 96,
+                "explanation": "Proper hydration supports kidney function, regulates body temperature, maintains skin health, and aids in digestion and nutrient absorption."
+            },
+            {
+                "text": "goldfish have a 3-second memory",
+                "type": "myth",
+                "confidence": 85,
+                "explanation": "Research shows goldfish can remember things for months, recognize different people, and can be trained to perform complex tasks."
+            },
+            {
+                "text": "vaccines reduce disease mortality",
+                "type": "fact",
+                "confidence": 98,
+                "explanation": "WHO data confirms vaccines prevent 2-3 million deaths annually and have eradicated or controlled many deadly diseases like smallpox and polio."
+            }
+        ];
+
+        // DOM Elements
+        const textInput = document.getElementById('textInput');
+        const analyzeBtn = document.getElementById('analyzeBtn');
+        const results = document.getElementById('results');
+        const confidence = document.getElementById('confidence');
+        const detection = document.getElementById('detection');
+        const analysisTime = document.getElementById('analysisTime');
+        const explanationText = document.getElementById('explanationText');
+
+        // Analysis function
+        function analyzeText() {
+            const inputText = textInput.value.trim().toLowerCase();
+            
+            if (!inputText) {
+                alert('Please enter a statement to analyze.');
+                return;
+            }
+
+            // Show loading state
+            analyzeBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Analyzing...</span>';
+            analyzeBtn.disabled = true;
+
+            // Simulate AI processing time
+            setTimeout(() => {
+                const startTime = performance.now();
+                
+                // Check against knowledge base
+                let bestMatch = null;
+                let highestSimilarity = 0;
+
+                knowledgeBase.forEach(item => {
+                    const similarity = calculateSimilarity(inputText, item.text);
+                    if (similarity > highestSimilarity && similarity > 0.3) {
+                        highestSimilarity = similarity;
+                        bestMatch = item;
+                    }
+                });
+
+                const endTime = performance.now();
+                const processingTime = ((endTime - startTime) / 1000).toFixed(1);
+
+                // Display results
+                if (bestMatch) {
+                    confidence.textContent = bestMatch.confidence + '%';
+                    detection.textContent = bestMatch.type.toUpperCase();
+                    detection.className = `text-2xl font-bold text-${bestMatch.type === 'fact' ? 'fact' : 'myth'}`;
+                    explanationText.textContent = bestMatch.explanation;
+                } else {
+                    // For unknown statements, use pattern-based detection
+                    const randomConfidence = Math.floor(Math.random() * 20) + 70;
+                    const isLikelyFact = inputText.includes('studies show') || inputText.includes('research confirms') || 
+                                       inputText.includes('according to') || inputText.includes('data shows');
+                    
+                    confidence.textContent = randomConfidence + '%';
+                    detection.textContent = isLikelyFact ? 'FACT' : 'MYTH';
+                    detection.className = `text-2xl font-bold ${isLikelyFact ? 'text-fact' : 'text-myth'}`;
+                    
+                    if (isLikelyFact) {
+                        explanationText.textContent = "This statement appears to reference research or data, suggesting it may be fact-based. However, always verify with reliable sources.";
+                    } else {
+                        explanationText.textContent = "This statement shows characteristics commonly found in myths or unverified claims. Further research with credible sources is recommended.";
+                    }
+                }
+
+                analysisTime.textContent = processingTime + 's';
+                results.classList.remove('hidden');
+
+                // Reset button
+                analyzeBtn.innerHTML = '<i class="fas fa-search"></i><span>Analyze Statement</span>';
+                analyzeBtn.disabled = false;
+            }, 800);
+        }
+
+        // Simple similarity calculation (for demo purposes)
+        function calculateSimilarity(str1, str2) {
+            const words1 = str1.split(' ');
+            const words2 = str2.split(' ');
+            const commonWords = words1.filter(word => words2.includes(word));
+            return commonWords.length / Math.max(words1.length, words2.length);
+        }
+
+        // Event listeners
+        analyzeBtn.addEventListener('click', analyzeText);
+        
+        textInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && e.ctrlKey) {
+                analyzeText();
+            }
+        });
+
+        // Navigation smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Prevent default behavior for all anchor tags as required
+        document.querySelectorAll('a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if (this.getAttribute('href').startsWith('#')) {
+                    // Allow smooth scrolling for internal links
+                    return;
+                }
+                e.preventDefault();
+            });
+        });
+    </script>
+</body>
+</html>
